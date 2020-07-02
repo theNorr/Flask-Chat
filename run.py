@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, redirect
 
 app = Flask(__name__)
 messages = []  # a list to store our messages.
