@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask, redirect
 
 app = Flask(__name__)
@@ -6,7 +7,8 @@ messages = []  # a list to store our messages.
 
 def add_messages(username, message):   # The method used to actually store the messages.
     """Add messages to the `messages` list"""
-    messages.append("{}: {}".format(username, message))
+    now = datetime.now().strftime("%H:%M:%S")  # strftime takes the datetime.now and convert it to a string with the given format of hour:minute:second
+    messages.append("({}) {}: {}".format(now, username, message))
 
 def get_all_messages():  # The metod to collect and add all messages.
     """Get all of the messages and separate them with a `br`"""
