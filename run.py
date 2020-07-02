@@ -19,14 +19,14 @@ def index():
 
 
 @app.route("/<username>")  # Whatever is inside of the anglebrackets is a variable.
-"""Display chat messages"""
 def user(username):  # user will take the argument of username.
+    """Display chat messages"""
     return "<h1>Welcome, {0}</h1>{1}".format(username, get_all_messages()) # .format()-method adds the username instead of the placeholder, calls on the function get_all_messages
 
 
 @app.route("/<username>/<message>")
-"""Create a new message and redirect back to the chat page"""
 def send_message(username, message):
+    """Create a new message and redirect back to the chat page"""
     add_messages(username, message)  # calls the function add_messages and passes in the username: and message.
     return redirect("/" + username)  # redirects the user to the url index/username
 
