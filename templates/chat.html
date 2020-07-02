@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat page for {{ username }}</title>
+</head>
+<body>
+    <h1>Welcome, {{ username }}</h1>
+    
+    <form method = "POST">
+        <textarea cols="50" rows="4" name="message" id="message"></textarea>
+        <br>
+        <button>Send message</button>
+    </form>
+    
+    {% for message in chat_messages %}
+        <p>({{ message.timestamp }}) {{ message.from }}: {{ message.message }}</p> <!--Formats the value of the variables we pass in and adds it to a paragraph-->
+    {% endfor %}
+    
+    <script>
+        let textbox = document.getElementById("message")  /*Javscript to get the HTML-element with the id of message and store it in the varible textBox. */
+    
+        let timer = setTimeout(function() { /*Javascript-function to set a timeout to refresh the page every 5 seconds, for us to always view the latest messages*/
+            location.reload();
+        }, 5000)
+        
+        textbox.onkeydown = function(e) {   /*Listens to user-click and then calls this function.*/
+            /* Resets the timer each time a key is pressed inside messagebox. */
+            clearTimeout(timer) /* stops the timer */
+            
+            timer = setTimeout(function() { /* starts the timer */
+                location.reload();
+            }, 5000)
+            
+        }
+        
+    </script>
+    
+</body>
+</html>
