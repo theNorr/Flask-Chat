@@ -1,8 +1,9 @@
 import os
 from datetime import datetime
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, request, session
 
 app = Flask(__name__)
+app.secret_key = "randomstring123"
 messages = []  # a list to store our messages.
 
 def add_messages(username, message):   # The method used to actually store the messages.
@@ -14,10 +15,18 @@ def get_all_messages():  # The metod to collect and add all messages.
     """Get all of the messages and separate them with a `br`"""
     return "<br>".join(messages)
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def index():
     """Main page with instructions"""
+    if request.method == "POST":  # If post is triggered from this site, run:
+        session["username"] = request.form["username"]
+        # Store the input from the HTML-element named username in this session-variable called username.
+
+    if "username" in session:   # If input(the username) is stored in session, run:
+        return redirect(session["username"]) #Redirects the webbrowser to read the code in the route username below.
+
     return render_template("index.html")
+
 
 
 @app.route("/<username>")  # Whatever is inside of the anglebrackets is a variable.
