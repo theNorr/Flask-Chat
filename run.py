@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import Flask, redirect
+from flask import Flask, redirect, render_template
 
 app = Flask(__name__)
 messages = []  # a list to store our messages.
@@ -17,7 +17,7 @@ def get_all_messages():  # The metod to collect and add all messages.
 @app.route("/")
 def index():
     """Main page with instructions"""
-    return "To send a message use: /USERNAME/MESSAGE"
+    return render_template("index.html")
 
 
 @app.route("/<username>")  # Whatever is inside of the anglebrackets is a variable.
