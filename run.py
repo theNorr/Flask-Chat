@@ -21,7 +21,7 @@ def index():
 @app.route("/<username>")  # Whatever is inside of the anglebrackets is a variable.
 """Display chat messages"""
 def user(username):  # user will take the argument of username.
-    return "Welcome {0}".format(username, get_all_messages()) # .format()-method adds the username instead of the placeholder, calls on the function get_all_messages
+    return "<h1>Welcome, {0}</h1>{1}".format(username, get_all_messages()) # .format()-method adds the username instead of the placeholder, calls on the function get_all_messages
 
 
 @app.route("/<username>/<message>")
